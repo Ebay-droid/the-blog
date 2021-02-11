@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>Posts</title>
+{% endblock title %}
+
+
+  {% block content %}
+    <div class="container">
+      <hr>
+      <h2>Create an new BlogPost</h2>
+      <form action="/posts" method="POST">
+        Title: <input type="text" name="title" id="title">
+        <br><br>
+        Post:  <textarea name="content" id="content" cols="30" rows="10"></textarea>
+
+        <br><br>
+        Author: <input type="text" name="author" id="author">
+        <br> <br>
+        <input class="btn" type="submit" value="Post">
+      </form>
+      <hr>
+
+      <h1 class="text-center">All Posts</h1>
+
+      {%for post in posts%}
+        <h3>{{post.title}}</h3>
+        {%if post.author%}
+          <h6>By: {{post.author}}</h6>
+        {%else%}
+          <h6>By: Unknown</h6>
+        {%endif%}
+       <p>{{post.content}}</p>
+       <button class="btn btn-danger" href="/posts/delete/{{post.id}}">Delete</button>
+       <button class="btn btn-info"href="/posts/edit/{{post.id}}">Edit</button>
+       <hr>
+      {%endfor%}
+      
+    </div>
+  {% endblock content %}
+
